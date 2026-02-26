@@ -5,32 +5,30 @@ if (month<10) {
   month = `0${month}`;
 }
 let day = date.getDate();
-async function linkGood(url) {
-  try {
-      const response = await fetch(url, { method: 'HEAD' });
-      //const isPdf = response.headers.get('content-type')?.includes('application/pdf');
-      if (response.ok) {
-        console.log("link was good");
-        return true;
-      } else {return false;}
-  } catch (error) {
-    console.log("error");
-      return false;
-  }
-}
-async function doshit() {
+// async function linkGood(url) {
+//  try {
+//      const response = await fetch(url, { method: 'HEAD' });
+//      //const isPdf = response.headers.get('content-type')?.includes('application/pdf');
+//      if (response.ok) {
+//        console.log("link was good");
+//        return true;
+//      } else {return false;}
+//  } catch (error) {
+//    console.log("error");
+//      return false;
+//  }
+//}
+function doshit() {
   const div = document.getElementById("container");
   for (i=-1; i<3; i++) {
     let currentURL = `https://ceciliengymnasium.de/attachments/article/1372/Vertretungsplan_${day+i}.${month}.20${year}.pdf`;
-    console.log(currentURL);
-    let proxy = "https://cors-anywhere.herokuapp.com/";
-    let targetURL = proxy + currentURL;
-    console.log(targetURL);
-    if (await linkGood(currentURL)) {
+    //console.log(currentURL);
+    //const proxyUrl = `https://api.allorigins.win{encodeURIComponent(currentURL)}`;
+    //if (await linkGood(pro)) {
       container.insertAdjacentHTML('beforeend', `<div><a href='${currentURL}'>Vertretungsplan_${day+i}-${month}-${year}</a></div><br>`);
-    } else {
-      continue;
-    }
+    //} else {
+    //  continue;
+    //}
   }
 }
 doshit()
