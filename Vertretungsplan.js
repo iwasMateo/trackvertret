@@ -20,7 +20,7 @@ let day = date.getDate();
 //}
 function doshit() {
   const div = document.getElementById("container");
-  for (i=-1; i<3; i++) {
+  for (i=0; i<3; i++) {
     let currentURL = `https://ceciliengymnasium.de/attachments/article/1372/Vertretungsplan_${day+i}.${month}.20${year}.pdf`;
     //console.log(currentURL);
     //const proxyUrl = `https://api.allorigins.win{encodeURIComponent(currentURL)}`;
