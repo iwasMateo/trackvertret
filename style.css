@@ -12,7 +12,9 @@
   height: 20vh;
   width: 100%;
 }
-#container div a {
+#container div p {
   display: block;
   line-height: 100%;
+  width: 100%;
+  font-size: 4vw;
 }
