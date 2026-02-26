@@ -1,8 +1,9 @@
 const date = new Date();
 let year = date.getFullYear() % 100;
 let month = date.getMonth();
+console.log(month);
 if (month<10) {
-  month = `0${month}`;
+  month = `0${month+1}`;
 }
 let day = date.getDate();
 // async function linkGood(url) {
@@ -26,8 +27,15 @@ function doshit() {
     //console.log(currentURL);
     //const proxyUrl = `https://api.allorigins.win{encodeURIComponent(currentURL)}`;
     //if (await linkGood(pro)) {
+    console.log(month);
+    let weekday = new Date((date.getFullYear()%100)+2000, date.getMonth(), day+i)
+    console.log(weekday);
+    if (weekday.getDay() <6) {
       container.insertAdjacentHTML('beforeend', `<div><p><a href='${currentURL}'>Vertretungsplan ${day+i}-${month}-${year}</a></p></div><br>`);
-    //} else {
+    } else {
+      console.log("The day was "+weekday.getDay());
+    }
+      //} else {
     //  continue;
     //}
   }
