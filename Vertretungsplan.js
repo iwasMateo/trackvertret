@@ -26,7 +26,7 @@ function doshit() {
     //console.log(currentURL);
     //const proxyUrl = `https://api.allorigins.win{encodeURIComponent(currentURL)}`;
     //if (await linkGood(pro)) {
-      container.insertAdjacentHTML('beforeend', `<div><p><a href='${currentURL}'>Vertretungsplan_${day+i}-${month}-${year}</a></p></div><br>`);
+      container.insertAdjacentHTML('beforeend', `<div><p><a href='${currentURL}'>Vertretungsplan ${day+i}-${month}-${year}</a></p></div><br>`);
     //} else {
     //  continue;
     //}

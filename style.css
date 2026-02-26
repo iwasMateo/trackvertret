@@ -16,5 +16,6 @@
   display: block;
   line-height: 100%;
   width: 100%;
-  font-size: 4vw;
+  font-size: 35px;
+  flex-wrap: wrap;
 }
