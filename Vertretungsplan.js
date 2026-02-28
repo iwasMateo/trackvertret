@@ -1,11 +1,12 @@
+// base date values; keep numeric fields separate from formatted strings
 const date = new Date();
+// two‑digit year for the current date (used only as a fallback, each weekday
+// will compute its own two‑digit year instead of reusing this value).
 let year = date.getFullYear() % 100;
-let month = date.getMonth();
-console.log(month);
-if (month<10) {
-  month = `0${month+1}`;
-}
 let day = date.getDate();
+// keep the numeric month for calculating future dates; don't clobber it with
+// a formatted string that will break `new Date(...)` calls.
+let month = date.getMonth();
 // async function linkGood(url) {
 //  try {
 //      const response = await fetch(url, { method: 'HEAD' });
@@ -20,30 +21,34 @@ let day = date.getDate();
 //  }
 //}
 function doshit() {
-  const div = document.getElementById("container");
-  for (i=0; i<5; i++) {
-    console.log(i);
-    //console.log(currentURL);
-    //https://ceciliengymnasium.de/attachments/article/1372/Vertretungsplan_26.01.2026.pdf
-    //const proxyUrl = `https://api.allorigins.win{encodeURIComponent(currentURL)}`;
-    //if (await linkGood(pro)) {
-    console.log(month);
-    let weekday = new Date((date.getFullYear()%100)+2000, date.getMonth(), day)
-    weekday.setDate(weekday.getDate()+i)
+  const container = document.getElementById("container");
+
+  const baseYear = date.getFullYear();
+  const baseMonth = date.getMonth(); // 0‑based month number
+  const baseDay = date.getDate();
+
+  for (let i = 0; i < 5; i++) {
+    let weekday = new Date(baseYear, baseMonth, baseDay + i);
     console.log(weekday);
-    let tempmonth = weekday.getMonth()
-    if (tempmonth < 10) {
-      tempmonth = `0${tempmonth+1}`
-    }
-    let currentURL = `https://ceciliengymnasium.de/attachments/article/1512/Vertretungsplan_${weekday.getDate()}.${tempmonth}.20${weekday.getFullYear%100}.pdf`;
-    if (weekday.getDay() <6) {
-      container.insertAdjacentHTML('beforeend', `<div><p><a href='${currentURL}'>Vertretungsplan ${weekday.getDate()}-${month}-${year}</a></p></div><br>`);
+
+    if (weekday.getDay() < 6) {
+      let y2 = weekday.getFullYear() % 100;
+      let m2 = weekday.getMonth() + 1;
+      if (m2 < 10) m2 = `0${m2}`;
+      let d2 = weekday.getDate();
+      if (d2 < 10) d2 = `0${d2}`;
+
+      let currentURL =
+        `https://ceciliengymnasium.de/attachments/article/1512/` +
+        `Vertretungsplan_${d2}.${m2}.20${y2}.pdf`;
+
+      container.insertAdjacentHTML(
+        'beforeend',
+        `<div><p><a href="${currentURL}">Vertretungsplan ${d2}-${m2}-${y2}</a></p></div><br>`
+      );
     } else {
-      console.log("The day was "+weekday.getDay());
+      console.log("The day was " + weekday.getDay());
     }
-      //} else {
-    //  continue;
-    //}
   }
 }
 doshit()
